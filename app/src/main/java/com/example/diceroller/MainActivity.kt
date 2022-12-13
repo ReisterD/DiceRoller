@@ -4,8 +4,8 @@ import android.net.Uri
 import android.os.Bundle
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.isVisible
 import androidx.core.view.isInvisible
+import androidx.core.view.isVisible
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,7 +30,7 @@ class MainActivity : AppCompatActivity() {
       val  rollIt = RollToAttack(20)
         val rollResult = rollIt.roll()
         val resText : TextView = findViewById(R.id.textView2)
-        resText.text = rollResult.toString()
+        //resText.text = rollResult.toString()
         val imageTest : ImageView = findViewById(R.id.imageView)
         val videoTest : VideoView = findViewById(R.id.videoView)
         if (rollResult >= 10) {
@@ -40,6 +40,11 @@ class MainActivity : AppCompatActivity() {
         } else {
             imageTest.isInvisible = true
             videoTest.isInvisible = false
+            resText.isSelected = true
+            resText.text = "Hello Thereeee"
+            val mediaController = MediaController(this)
+            mediaController.setAnchorView(videoTest)
+            videoTest.setMediaController(mediaController);
             videoTest.setVideoURI(Uri.parse("android.resource://" + packageName + "/" + R.raw.test))
             videoTest.start()
         }
